@@ -1,49 +1,38 @@
-
 import React, { useState } from 'react';
 import ProductList from './ProductList';
-import './App.css';
 import AboutUs from './AboutUs';
+import './App.css';
 
 function App() {
-  
   const [showProductList, setShowProductList] = useState(false);
 
-  const handleGetStartedClick = () => {
+  const handleStartShopping = () => {
     setShowProductList(true);
-  };
-
-  const handleHomeClick = () => {
-    setShowProductList(false);
   };
 
   return (
     <div className="app-container">
-      <div className={`landing-page ${showProductList ? 'fade-out' : ''}`}>
-        <div className="background-image"></div>
-        <div className="content">
-         <div className="landing_content">
-         <h1>Welcome To Paradise Nursery</h1>
-          <div className="divider"></div>
-          <p>Where Green Meets Serenity</p>
-         
-          <button className="get-started-button" onClick={handleGetStartedClick}>
-            Get Started
-          </button>
-         </div>
-          <div className="aboutus_container">
-          <AboutUs/>
+      {!showProductList ? (
+        <div className="landing-page">
+          <div className="landing-content">
+            <h1 style={{ fontSize: '3.5rem', marginBottom: '10px', fontWeight: 'bold' }}>Paradise Nursery</h1>
+            <p style={{ fontSize: '1.5rem', fontStyle: 'italic', marginBottom: '20px' }}>Where Green Meets Serenity</p>
+            
+            {/* Task 2 Component Included */}
+            <AboutUs />
+            
+            <button className="get-started-btn" onClick={handleStartShopping}>
+              Get Started
+            </button>
           </div>
-          </div>
-
-      </div>
-      <div className={`product-list-container ${showProductList ? 'visible' : ''}`}>
-        <ProductList onHomeClick={handleHomeClick}/>
-      </div>
+        </div>
+      ) : (
+        <div className="product-list-container">
+          <ProductList />
+        </div>
+      )}
     </div>
   );
 }
 
 export default App;
-
-
-
